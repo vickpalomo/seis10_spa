@@ -47,16 +47,12 @@ export default {
       loginData: { email: '', password: '' }
     }
   },
-  computed: {
-    getToken () {
-      return this.$store.state
-    }
-  },
   methods: {
     login () {
       this.axios.post('/login', this.loginData)
         .then((data) => {
           this.$store.dispatch('setAuthorizationToken', data.data.token)
+          this.$store.dispatch('setUser', { name: data.data.name, role: data.data.role, id_user: data.data.id_user })
           this.$router.push({ name: 'Home' })
         })
         .catch((err) => {
