@@ -1,51 +1,51 @@
 <template>
   <b-container>
     <b-row>
-      <b-col>
-        Catalogo de Automoviles
+      <b-col class="mt-5">
+        <h1 class="text-light">
+          Catálogo de Automoviles
+        </h1>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col class="text-right mt-0">
+        <b-button id="show-btn" @click="openModal('create')" variant="success">Agregar</b-button>
       </b-col>
     </b-row>
     <b-row>
       <b-col>
-        <b-button id="show-btn" @click="openModal('create')">Agregar</b-button>
+        <b-card class="mt-2 mb-2">
+          <b-table
+            id="my-table"
+            responsive
+            :items="cars"
+            :per-page="perPage"
+            :current-page="currentPage"
+            :fields="fields"
+            striped
+          >
+            <template v-slot:cell(actions)="row">
+              <b-button variant="info" :disabled="row.item.id_user !== parseInt(getUser.id_user)" size="sm" @click="openModal('update', row.item)" class="mr-1">
+                Actualizar
+              </b-button>
+              <b-button variant="danger" :disabled="row.item.id_user !== parseInt(getUser.id_user)"  size="sm" @click="deleteCar(row.item.id)">
+                Eliminar
+              </b-button>
+            </template>
+          </b-table>
+          <b-pagination
+            v-model="currentPage"
+            :total-rows="rows"
+            :per-page="perPage"
+            align="center"
+            aria-controls="my-table"
+          ></b-pagination>
+        </b-card>
+
       </b-col>
     </b-row>
-    <b-row>
-      <b-col>
-        <b-table
-          id="my-table"
-          responsive
-          :items="cars"
-          :per-page="perPage"
-          :current-page="currentPage"
-          :fields="fields"
-          small
-        >
-          <template v-slot:cell(actions)="row">
-            <b-button variant="info" :disabled="row.item.id_user !== parseInt(getUser.id_user)" size="sm" @click="openModal('update', row.item)" class="mr-1">
-              Actualizar
-            </b-button>
-            <b-button variant="danger" :disabled="row.item.id_user !== parseInt(getUser.id_user)"  size="sm" @click="deleteCar(row.item.id)">
-              Eliminar
-            </b-button>
-          </template>
-        </b-table>
-        <b-pagination
-          v-model="currentPage"
-          :total-rows="rows"
-          :per-page="perPage"
-          align="center"
-          aria-controls="my-table"
-        ></b-pagination>
 
-        <p class="mt-3">Current Page: {{ currentPage }}</p>
-      </b-col>
-    </b-row>
-    <b-button @click.prevent="updateCarLocation">
-      Test
-    </b-button>
-
-    <b-modal id="bv-modal-example" hide-footer>
+    <b-modal id="bv-modal-example" hide-footer :title="modalTitle">
       <CarForm :type='actionForm' @created="appendNewCar" @updated="updateCarItem" :dataCar="car" />
     </b-modal>
   </b-container>
@@ -94,6 +94,11 @@ export default {
     },
     car () {
       return this.carAux
+    },
+    modalTitle () {
+      return this.actionForm === 'create'
+        ? 'Agregar nuevo vehículo'
+        : 'Actualizar vehículo'
     }
   },
   mounted () {

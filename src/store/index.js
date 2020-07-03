@@ -28,6 +28,17 @@ const mutations = {
     state.user.name = user.name
     state.user.role = user.role
     state.user.id_user = user.id_user
+  },
+  logout (state) {
+    localStorage.removeItem('user')
+    localStorage.removeItem('role')
+    localStorage.removeItem('id_user')
+    localStorage.removeItem('token')
+
+    state.user.name = ''
+    state.user.role = ''
+    state.user.id_user = ''
+    state.authorization = ''
   }
 }
 
@@ -37,6 +48,9 @@ const actions = {
   },
   setUser ({ commit }, user) {
     commit('setUser', user)
+  },
+  logout ({ commit }) {
+    commit('logout')
   }
 }
 

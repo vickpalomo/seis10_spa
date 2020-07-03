@@ -1,0 +1,15 @@
+@import 'node_modules/bootstrap/scss/bootstrap';
+@import 'node_modules/bootstrap-vue/src/index.scss';
+
+body {
+  background-color: #455A64;
+  // padding-bottom: 30px;
+  nav.navbar {
+    a.nav-link {
+      font-weight: bold;
+      &.router-link-exact-active {
+        color: #FFF;
+      }
+    }
+  }
+}

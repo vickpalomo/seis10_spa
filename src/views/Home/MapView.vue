@@ -1,7 +1,15 @@
 <template>
   <b-container>
     <b-row>
-      <gmap-map
+      <b-col class="mt-5">
+        <h1 class="text-light">
+          Visualización en tiempo real
+        </h1>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col class="mt-0">
+        <gmap-map
           :center="center"
           :zoom="12"
           style="width:100%;  height: 400px;"
@@ -13,6 +21,7 @@
           @click="center=mark.position"
         ></gmap-marker>
       </gmap-map>
+      </b-col>
     </b-row>
   </b-container>
 </template>
@@ -35,18 +44,18 @@ export default {
     this.axios.defaults.headers.common.Authorization = 'Bearer ' + this.$store.state.authorization
     this.axios.get('/cars')
       .then((data) => {
-        const aux = data.data.map((car) => {
-          return {
-            id: car.id,
-            position: {
-              lat: parseFloat(car.lat),
-              lng: parseFloat(car.lng)
+        const aux = data.data
+          .filter((car) => car.lat !== null)
+          .map((car) => {
+            return {
+              id: parseInt(car.id),
+              position: {
+                lat: parseFloat(car.lat),
+                lng: parseFloat(car.lng)
+              }
             }
-          }
-        })
-        console.log('Aux', JSON.stringify(aux))
+          })
         this.markers = aux
-        console.log(this.markers)
       })
       .catch((err) => {
         console.log(err)

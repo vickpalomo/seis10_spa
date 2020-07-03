@@ -1,49 +1,55 @@
 <template>
-  <b-container>
-    <div>
-      <b-navbar toggleable="lg" type="dark" variant="info">
-        <b-navbar-brand href="#">seis10</b-navbar-brand>
-        </b-navbar>
-    </div>
-    <b-row align-h="center">
-      <b-col cols="6">
-        <b-form @submit.prevent="login">
-          <b-form-group
-            id="email-group"
-            label="Email:"
-            label-for="email"
-          >
-          <b-form-input
-            id="email"
-            v-model="loginData.email"
-            type="email"
-            required
-            placeholder="Enter email"
-          ></b-form-input>
-          </b-form-group>
+  <div class="seis10__login">
+    <b-navbar toggleable="lg" type="dark" variant="dark">
+      <b-navbar-brand href="/" class="ml-5">seis10</b-navbar-brand>
+    </b-navbar>
 
-          <b-form-group
-            id="password-group"
-            label="Password"
-            label-for="password"
-          >
-          <b-form-input
-            id="password"
-            v-model="loginData.password"
-            type="password"
-            required
-          ></b-form-input>
-          </b-form-group>
+    <b-container fluid>
+      <b-row align-h="center" class="mt-5">
+        <b-col cols="12" sm="6">
+          <b-card>
+            <b-form @submit.prevent="login" class="text-left">
+              <b-form-group
+                id="email-group"
+                label="Email:"
+                label-for="email"
+                label-class="font-weight-bold pt-0"
+              >
+              <b-form-input
+                id="email"
+                v-model="loginData.email"
+                type="email"
+                required
+                placeholder="Ingresa tu correo"
+              ></b-form-input>
+              </b-form-group>
 
-          <b-form-group>
-            <b-button type="submit" variant="success">
-              Login
-            </b-button>
-          </b-form-group>
-        </b-form>
-      </b-col>
-    </b-row>
-  </b-container>
+              <b-form-group
+                id="password-group"
+                label="Password"
+                label-for="password"
+                label-class="font-weight-bold pt-0"
+              >
+              <b-form-input
+                id="password"
+                v-model="loginData.password"
+                type="password"
+                required
+                placeholder="Ingresa tu contraseña"
+              ></b-form-input>
+              </b-form-group>
+
+              <b-form-group class="text-center">
+                <b-button type="submit" variant="success">
+                  Iniciar sesión
+                </b-button>
+              </b-form-group>
+            </b-form>
+          </b-card>
+        </b-col>
+      </b-row>
+    </b-container>
+  </div>
 </template>
 <script>
 export default {

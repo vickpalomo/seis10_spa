@@ -5,9 +5,10 @@ import store from './store'
 import { BootstrapVue } from 'bootstrap-vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
+// import 'bootstrap/dist/css/bootstrap.css'
+// import 'bootstrap-vue/dist/bootstrap-vue.css'
 import * as VueGoogleMaps from 'vue2-google-maps'
+import './assets/scss/global.scss'
 // Configuracion de Axios
 // axios.defaults.headers.common.Authorization = store.state.authorization
 axios.defaults.baseURL = process.env.VUE_APP_API_URI
