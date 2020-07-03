@@ -1,5 +1,10 @@
 <template>
   <b-container>
+    <div>
+      <b-navbar toggleable="lg" type="dark" variant="info">
+        <b-navbar-brand href="#">seis10</b-navbar-brand>
+        </b-navbar>
+    </div>
     <b-row align-h="center">
       <b-col cols="6">
         <b-form @submit.prevent="login">

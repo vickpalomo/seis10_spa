@@ -2,7 +2,7 @@
   <b-container>
     <b-row>
       <b-col>
-        <b-form @submit.prevent="">
+        <b-form @submit.prevent="type === 'create' ? createCar() : updateCar()">
           <b-form-group
             id="brand-group"
             label="Marca:"
@@ -56,7 +56,7 @@
           </b-form-group>
 
           <b-form-group>
-            <b-button type="button" variant="success" @click.prevent="type === 'create' ? createCar : updateCar">
+            <b-button type="submit" variant="success" >
               {{ type === 'create' ? 'Guardar' : 'Actualizar' }}
             </b-button>
           </b-form-group>
@@ -102,7 +102,13 @@ export default {
         })
     },
     updateCar () {
-      this.axios.patch('/cars', this.car)
+      const data = {
+        brand: this.car.brand,
+        model: this.car.model,
+        color: this.car.color,
+        plates: this.car.plates
+      }
+      this.axios.patch(`/cars/${this.car.id}`, data)
         .then((data) => {
           this.$emit('updated', data.data)
         })

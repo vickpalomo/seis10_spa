@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-import Login from '../views/Login.vue'
+import Home from '@/views/Home.vue'
+import Login from '@/views/Login.vue'
+import CarView from '@/views/Home/CarView'
+import MapView from '@/views/Home/MapView'
 
 Vue.use(VueRouter)
 
@@ -17,7 +19,20 @@ const routes = [
     component: Home, // Vista de esa ruta
     meta: {
       requiresAuth: true
-    }
+    },
+    redirect: '/home/cars',
+    children: [
+      {
+        path: 'cars',
+        name: 'Cars',
+        component: CarView
+      },
+      {
+        path: 'maps',
+        name: 'Maps',
+        component: MapView
+      }
+    ]
   },
   {
     path: '/login',
