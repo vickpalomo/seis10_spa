@@ -1,4 +1,4 @@
-akind: pipeline
+kind: pipeline
 name: spa_seis10
 
 steps:
